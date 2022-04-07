@@ -1,29 +1,27 @@
 USE sakila;
 
-# 1. 
+## 1. 
 
 SELECT *
 FROM sakila.actor
 WHERE first_name = 'Scarlett';
 
-# 2. ** NIPUTAIDEA**
+## 2.1
 
-SELECT CONVERT(return_date, DATETIME) AS 'return_date', CONVERT(last_update, DATETIME) AS 'today' 
+SELECT COUNT(DISTINCT inventory_id) AS rentable_films
 FROM sakila.rental;
 
-SELECT (last_update > return_date) AS 'in_stock'
-FROM sakila.rental;
+## 2.2
 
-SELECT *
-FROM sakila.rental;
-
-SELECT COUNT(DISTINCT(inventory_id))
-FROM sakila.rental;
+SELECT COUNT(*)
+FROM sakila.rental
+WHERE rental_date IS NOT NULL;
 
 ## 3. 
 
 SELECT MAX(length) AS 'max_length', MIN(length) AS 'min_length'
 FROM sakila.film;
+
 
 ## 4. 
 
@@ -50,10 +48,36 @@ LIMIT 20;
 ## 8.
 SELECT *, CASE WHEN(DATE_FORMAT(CONVERT(rental_date, DATE), '%W') IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')) THEN 'Workday' ELSE 'Weekend' END AS 'day_type'
 FROM sakila.rental;
- 
-	ELSE k_symbol END AS k_symbol
 
-SELECT 
+## 9.  
+
+SELECT DISTINCT release_year
+FROM sakila.film;
+
+## 10. 
+
+SELECT title 
+FROM sakila.film
+WHERE title LIKE '%Armageddon%';
+
+## 11. 
+
+SELECT title
+FROM sakila.film
+WHERE title LIKE '%Apollo'; 
+
+## 12. 
+
+SELECT title, length
+FROM sakila.film
+ORDER BY length DESC
+LIMIT 10;
+
+## 13. 
+
+SELECT COUNT(*) AS 'Behind the Scenes'
+FROM sakila.film
+WHERE special_features LIKE '%Behind the Scenes%';
 
 
 
